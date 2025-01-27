@@ -13,7 +13,7 @@ export default function Game({
   canvasHeight,
   gravity,
   pipeSpawnRate,
-  flayingHight,
+  jumpForce,
 }: {
   pipe: Pipe;
   initialBird: Bird;
@@ -22,7 +22,7 @@ export default function Game({
   canvasHeight: number;
   gravity: number;
   pipeSpawnRate: number;
-  flayingHight: number;
+  jumpForce: number;
 }): JSX.Element {
   //
   const [topPipesPositions, setTopPipesPositions] = useState<Pipe[]>([]);
@@ -131,14 +131,18 @@ export default function Game({
     /// if pressed key flaying to top
     if (currentMousePressed) {
       setBirdPosition((bird) => {
-        return bird.y <= 0 ? bird : { ...bird, y: bird.y - flayingHight };
+        return bird.y <= 0 ? bird : { ...bird, velocity: jumpForce };
       });
     }
 
     ///  falling
     const initialY = initialBird.y;
     setBirdPosition((bird) => {
-      const updatedBird = { ...bird, y: bird.y + gravity };
+      const updatedBird = {
+        ...bird,
+        y: bird.y + bird.velocity,
+        velocity: bird.velocity + gravity,
+      };
 
       if (updatedBird.y > canvasHeight) {
         setGameOver(true);

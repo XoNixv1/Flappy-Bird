@@ -27,6 +27,7 @@ const birdY = canvasHeight / 2.5;
 const bird: Bird = {
   width: 127,
   height: 84,
+  velocity: 0,
   x: birdX,
   y: birdY,
 };
@@ -37,9 +38,9 @@ const bird: Bird = {
 // settings
 const pipeSpeed = 16;
 const openSize = 300;
-const gravity = 8;
+const gravity = 1;
 const pipeSpawnRate = 1000;
-const flayingHight = 20;
+const jumpForce = -10;
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
           canvasHeight={canvasHeight}
           gravity={gravity}
           pipeSpawnRate={pipeSpawnRate}
-          flayingHight={flayingHight}
+          jumpForce={jumpForce}
         ></Game>
       </Canvas>
     </div>
@@ -62,10 +63,12 @@ function App() {
 
 export default App;
 
-export interface Pipe extends Bird {
+export interface Pipe extends Omit<Bird, "velocity"> {
   passed: boolean;
 }
+
 export interface Bird {
+  velocity: number;
   width: number;
   height: number;
   x: number;
