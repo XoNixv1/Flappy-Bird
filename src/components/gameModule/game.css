@@ -1,0 +1,25 @@
+body {
+  user-select: none;
+}
+
+.score {
+  position: absolute;
+  top: 20px;
+  right: 100px;
+  font-size: 48px;
+  pointer-events: none;
+  z-index: 1;
+  color: white;
+}
+
+.start-screen {
+  cursor: "pointer";
+  font-size: 48px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  font-weight: bold;
+  user-select: none;
+  z-index: 1;
+  color: white;
+}

@@ -1,5 +1,5 @@
 import Canvas from "../Background";
-import Pipes from "../Pipes";
+import Game from "../gameModule/Game";
 import "./App.css";
 
 // Canvas
@@ -7,38 +7,67 @@ const canvasWidth = window.innerWidth;
 const canvasHeight = window.innerHeight;
 
 // pipe
-const pipeWidth = canvasWidth / 8;
-const pipeHeight = 600;
-
-// pipe speed/open size setting
-const pipeSpeed = 6;
-const openSize = 300;
+const width = canvasWidth / 8;
+const height = 600;
 
 //top pipe
-const pipeX = canvasWidth;
-const pipeY = -10;
+const x = canvasWidth;
+const y = -10;
 const pipe: Pipe = {
-  pipeWidth: pipeWidth,
-  pipeHeight: pipeHeight,
-  pipeX: pipeX,
-  pipeY: pipeY,
+  width: width,
+  height: height,
+  x: x,
+  y: y,
+  passed: false,
 };
 
-export interface Pipe {
-  pipeWidth: number;
-  pipeHeight: number;
-  pipeX: number;
-  pipeY: number;
-}
+//bird
+const birdX = canvasWidth / 8;
+const birdY = canvasHeight / 2.5;
+const bird: Bird = {
+  width: 127,
+  height: 84,
+  x: birdX,
+  y: birdY,
+};
+
+// width: 110,
+// height: 89,
+
+// settings
+const pipeSpeed = 16;
+const openSize = 300;
+const gravity = 8;
+const pipeSpawnRate = 1000;
+const flayingHight = 20;
 
 function App() {
   return (
     <div className="App">
       <Canvas>
-        <Pipes pipe={pipe} pipeSpeed={pipeSpeed} openSize={openSize}></Pipes>
+        <Game
+          pipe={pipe}
+          pipeSpeed={pipeSpeed}
+          openSize={openSize}
+          initialBird={bird}
+          canvasHeight={canvasHeight}
+          gravity={gravity}
+          pipeSpawnRate={pipeSpawnRate}
+          flayingHight={flayingHight}
+        ></Game>
       </Canvas>
     </div>
   );
 }
 
 export default App;
+
+export interface Pipe extends Bird {
+  passed: boolean;
+}
+export interface Bird {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+}
