@@ -7,7 +7,6 @@ This is a **Flappy Bird** game implementation built using **TypeScript** and **J
 - **TypeScript**: Provides type safety and better development experience.
 - **JavaScript**: Used alongside TypeScript for the core game logic.
 - **Vercel**: Deployment platform for hosting the game.
-
 ## Deployment
 
 You can play the game live here:  
